@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{{ url_for('static', filename='logo.png') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .low-chance {
+            color: green;
+        }
+        .high-chance {
+            color: red;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #57929c;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #8a9599;
+        }
+        img {
+            width: 130px; /* Adjust the size as needed */
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if prediction == 'Low Chance' %}
+        <img src="{{ url_for('static', filename='great.png') }}" alt="Great">
+        <h2>Great!</h2>
+        {% elif prediction == 'High Chance' %}
+        <img src="{{ url_for('static', filename='careful.png') }}" alt="Careful">
+        <h2>Careful!</h2>
+        {% else %}
+        <h2>Prediction Result</h2>
+        {% endif %}
+        <p>The CholesteRise system predicts that you have a <strong class="{% if prediction == 'Low Chance' %}low-chance{% elif prediction == 'High Chance' %}high-chance{% endif %}">{{ prediction }}</strong> of experiencing Hypercholesterolemia</p>
+        <a href="/">Go back</a>
+    </div>
+</body>
+</html>
